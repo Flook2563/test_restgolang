@@ -17,6 +17,16 @@ func CreateCustomer(c *gin.Context) {
 	db.GetDB().Create(&customer)
 	c.JSON(http.StatusOK, customer)
 }
+func GetAllCustomers(c *gin.Context) {
+	var customers []models.Customer
+
+	if err := db.GetDB().Find(&customers).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Customer not found"})
+		return
+	}
+
+	c.JSON(http.StatusOK, customers)
+}
 
 func GetCustomer(c *gin.Context) {
 	id := c.Param("id")
@@ -36,7 +46,7 @@ func UpdateCustomer(c *gin.Context) {
 		return
 	}
 	if err := c.BindJSON(&customer); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error":  "Invalid input"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid input"})
 		return
 	}
 	db.GetDB().Save(&customer)

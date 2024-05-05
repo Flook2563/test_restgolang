@@ -15,8 +15,17 @@ func InitDatabase() {
 	db, err = gorm.Open(sqlite.Open("customers.db"), &gorm.Config{})
 	if err != nil {
 		log.Fatal("Connect to the database Fail :", err)
+	} else {
+		log.Println("Connect to the database . . .")
 	}
-	db.AutoMigrate(&models.Customer{})
+
+	dberr := db.AutoMigrate(&models.Customer{})
+	if dberr != nil {
+		log.Println("Auto-Migrate Fail :", dberr.Error())
+	} else {
+		log.Println("Auto-Migrate . . .")
+	}
+
 }
 
 func GetDB() *gorm.DB {

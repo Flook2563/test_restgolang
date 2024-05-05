@@ -13,6 +13,7 @@ func main() {
 	router := gin.Default()
 
 	router.POST("/customers", handlers.CreateCustomer)
+	router.GET("/customers", handlers.GetAllCustomers)
 	router.GET("/customers/:id", handlers.GetCustomer)
 	router.PUT("/customers/:id", handlers.UpdateCustomer)
 	router.DELETE("/customers/:id", handlers.DeleteCustomer)

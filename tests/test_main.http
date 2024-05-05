@@ -1,0 +1,26 @@
+GET http://localhost:8080/customers
+###
+
+POST http://localhost:8080/customers
+Content-Type: application/json
+
+{
+  "name": "Customers person2",
+  "age": 25
+}
+###
+
+GET http://localhost:8080/customers/1
+###
+
+PUT http://localhost:8080/customers/1
+Content-Type: application/json
+
+{
+  "name": "Jane Doe",
+  "age": 35
+}
+###
+
+DELETE http://localhost:8080/customers/1
+###
